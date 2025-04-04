@@ -1,5 +1,5 @@
 import React from "react";
-import "./myList.css";
+import "../styles/myList.css";
 import { Link } from "react-router-dom";
 import { handleToggleCompleted, handleDelete } from "../services/taskService";
 

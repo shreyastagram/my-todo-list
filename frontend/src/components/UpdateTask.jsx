@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getTodoById, updateTodo } from "../api";
-import "./updateTask.css";
+import "../styles/updateTask.css";
 
 export default function UpdateTask({ setTasks }) {
   const { id } = useParams();
@@ -31,7 +31,7 @@ export default function UpdateTask({ setTasks }) {
         task: task.task,
         assignedTo: task.assignedTo,
       });
-      
+
       setTasks((prevTasks) =>
         prevTasks.map((task) => (task._id === id ? updatedTask : task))
       );

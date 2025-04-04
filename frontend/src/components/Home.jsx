@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./home.css";
+import "../styles/home.css";
 import MyList from "./MyList";
 import {
   handleSubmit

@@ -1,11 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./navbar.css";
+import "../styles/navbar.css";
 
 export default function Navbar() {
   return (
     <nav className="main-header">
-      <img className="header-logo" src="/todo.svg" />
+      <NavLink to="/about" id="logo-link">
+        <img className="header-logo" src="/todo.svg" alt="Logo" />
+      </NavLink>
       <NavLink
         to="/"
         className={({ isActive }) => (isActive ? "active-link" : "")}
@@ -17,6 +19,12 @@ export default function Navbar() {
         className={({ isActive }) => (isActive ? "active-link" : "")}
       >
         My List
+      </NavLink>
+      <NavLink
+        to="/reviews"
+        className={({ isActive }) => (isActive ? "active-link" : "")}
+      >
+        Reviews
       </NavLink>
     </nav>
   );
