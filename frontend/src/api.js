@@ -1,5 +1,4 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:3000";
-console.log("Backend URL:", import.meta.env.VITE_BACKEND_URL);
 
 export const getTodos = async () => {
   const response = await fetch(`${BACKEND_URL}/todos`);
@@ -16,7 +15,6 @@ export const getTodoById = async (id) => {
 };
 
 export const createTodo = async (task, assignedTo) => {
-  console.log("Sending req:", JSON.stringify({ task, assignedTo }));
   try {
     const response = await fetch(`${BACKEND_URL}/todos`, {
       method: "POST",
@@ -63,9 +61,12 @@ export const getDeletedTodos = async () => {
 };
 
 export const restoreTodo = async (id) => {
-  const response = await fetch(`${BACKEND_URL}/todos/recyclebin/restore/${id}`, {
-    method: "PATCH",
-  });
+  const response = await fetch(
+    `${BACKEND_URL}/todos/recyclebin/restore/${id}`,
+    {
+      method: "PATCH",
+    }
+  );
   if (!response.ok) throw new Error("Failed to restore task");
   const data = await response.json();
   return data.data || data;

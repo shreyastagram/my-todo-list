@@ -12,6 +12,7 @@
 .feedback-form {
   display: flex;
   flex-direction: column;
+  animation: fadeSlideIn 0.8s ease-in-out;
   gap: 1.5rem;
 }
 
@@ -35,13 +36,63 @@
 
 /* Reuse your existing iOS styles */
 .ios-input, .ios-textarea {
-  /* Your existing input styles */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 0.3s;
+}
+/* Give each input a staggered delay */
+.ios-input:nth-of-type(1) {
+  animation-delay: 0.3s;
+}
+.ios-input:nth-of-type(2) {
+  animation-delay: 0.5s;
+}
+.ios-textarea {
+  animation-delay: 0.7s;
+}
+
+/* Input and textarea focus effect */
+.ios-input:focus,
+.ios-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 199, 89, 0.3);
+  transition: box-shadow 0.3s ease;
 }
 
 .ios-button {
   /* Your existing button styles */
-  margin-top: 1rem;
+  margin-top: 1rem;opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: 1s;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
+
+/* Button hover bounce */
+.ios-button:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* === Keyframes === */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Small phones (iPhone SE, Galaxy Fold) */
 @media (max-width: 360px) {
   .ios-button {

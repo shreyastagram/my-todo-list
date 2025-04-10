@@ -33,21 +33,30 @@ export default function Reviews() {
   return (
     <div className="reviews-container">
       <h1 className="reviews-header">User Feedback</h1>
+
       <div className="reviews-grid">
-        {feedbacks.map((feedback) => (
-          <div key={feedback._id} className="feedback-card">
-            <div className="feedback-header">
-              <h3>{feedback.name}</h3>
-              <span className="feedback-date">
-                {new Date(feedback.createdAt).toLocaleDateString()}
-              </span>
+        {feedbacks.length === 0 ? (
+          <h1 className="reviews-not-found">No Feedbacks Found</h1>
+        ) : (
+          feedbacks.map((feedback, index) => (
+            <div
+              key={feedback._id}
+              className="feedback-card"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="feedback-header">
+                <h3>{feedback.name}</h3>
+                <span className="feedback-date">
+                  {new Date(feedback.createdAt).toLocaleDateString()}
+                </span>
+              </div>
+              <a href={`mailto:${feedback.email}`} className="feedback-email">
+                {feedback.email}
+              </a>
+              <p className="feedback-message">{feedback.message}</p>
             </div>
-            <a href={`mailto:${feedback.email}`} className="feedback-email">
-              {feedback.email}
-            </a>
-            <p className="feedback-message">{feedback.message}</p>
-          </div>
-        ))}
+          ))
+        )}
       </div>
       <div className="button-group">
         <Link

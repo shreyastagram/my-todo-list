@@ -6,20 +6,28 @@ import { handleSubmit } from "../services/taskService";
 export default function Home({ tasks, setTasks, deletedTasks, loadTasks }) {
   const [taskName, setTaskName] = useState("");
   const [assignedTo, setAssignedTo] = useState("");
+  const [formKey, setFormKey] = useState(0); // For reset animations
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    await handleSubmit(
+      e,
+      taskName,
+      assignedTo,
+      setTasks,
+      setTaskName,
+      setAssignedTo
+    );
+    
+    // Trigger animation by remounting the form
+    setFormKey(prevKey => prevKey + 1);
+  };
 
   return (
     <div>
       <form
-        onSubmit={(e) =>
-          handleSubmit(
-            e,
-            taskName,
-            assignedTo,
-            setTasks,
-            setTaskName,
-            setAssignedTo
-          )
-        }
+        key={formKey}
+        onSubmit={handleFormSubmit}
         className="task-form"
       >
         <label htmlFor="taskName">Task Name:- </label>

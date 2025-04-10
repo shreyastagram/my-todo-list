@@ -23,7 +23,6 @@ function App() {
   const loadTasks = async () => {
     const active = await fetchTasks();
     const deleted = await fetchDeletedTasks();
-    console.log("Deleted tasks from backend", deleted);
     setTasks(active);
     setDeletedTasks(deleted);
   };

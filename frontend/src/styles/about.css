@@ -1,158 +1,262 @@
 /* AboutUs.css */
 .about-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", 
-                 "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", 
+               "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  animation: fadeIn 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.about-header h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: #1c1c1e;
+  margin-bottom: 0.5rem;
+  animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+.about-header p {
+  font-size: 1.1rem;
+  color: #636366;
+  animation: slideUp 0.8s ease-out 0.3s both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.about-content {
+  display: grid;
+  gap: 2rem;
+}
+
+.about-card {
+  background-color: rgba(245, 245, 247, 0.8);
+  border-radius: 16px;
+  padding: 2rem;
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transform: scale(0.95);
+  opacity: 0;
+  animation: cardEntrance 0.6s ease-out forwards;
+}
+
+.about-card:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+.about-card:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.about-card:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes cardEntrance {
+  from { 
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
   }
-  
-  .about-header {
-    text-align: center;
-    margin-bottom: 3rem;
+  to { 
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
-  
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.about-card:hover .card-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.about-card h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1c1c1e;
+  margin-bottom: 1.2rem;
+}
+
+.about-card p,
+.about-card li {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #3a3a3c;
+}
+
+.about-card ul,
+.about-card ol {
+  padding-left: 1.2rem;
+}
+
+.about-card li {
+  margin-bottom: 0.8rem;
+  position: relative;
+  opacity: 0;
+  transform: translateX(-10px);
+  animation: listItemEntrance 0.4s ease-out forwards;
+}
+
+.about-card ul li:nth-child(1) { animation-delay: 0.7s; }
+.about-card ul li:nth-child(2) { animation-delay: 0.8s; }
+.about-card ul li:nth-child(3) { animation-delay: 0.9s; }
+.about-card ul li:nth-child(4) { animation-delay: 1.0s; }
+.about-card ul li:nth-child(5) { animation-delay: 1.1s; }
+
+.about-card ol li:nth-child(1) { animation-delay: 0.7s; }
+.about-card ol li:nth-child(2) { animation-delay: 0.8s; }
+.about-card ol li:nth-child(3) { animation-delay: 0.9s; }
+.about-card ol li:nth-child(4) { animation-delay: 1.0s; }
+
+@keyframes listItemEntrance {
+  from { 
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.about-card li::before {
+  content: "•";
+  color: #007aff;
+  font-size: 1.5rem;
+  position: absolute;
+  left: -1.2rem;
+  top: -0.2rem;
+}
+
+.about-card ol {
+  counter-reset: list-counter;
+  padding-left: 1.5rem;
+}
+
+.about-card ol li {
+  counter-increment: list-counter;
+  list-style-type: none;
+}
+
+.about-card ol li::before {
+  content: counter(list-counter) ".";
+  color: #007aff;
+  font-weight: 600;
+  font-size: 1rem;
+  position: absolute;
+  left: -1.5rem;
+  top: 0.1rem;
+}
+
+.about-footer {
+  text-align: center;
+  margin-top: 3rem;
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out 1.2s forwards;
+}
+
+.ios-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  background-color: #007aff;
+  color: white;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.ios-button:hover {
+  background-color: #0062cc;
+  transform: translateY(-2px);
+}
+
+.ios-button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+.ios-button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
   .about-header h1 {
-    font-size: 2.4rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: #1c1c1e;
-    margin-bottom: 0.5rem;
+    color: #f5f5f7;
   }
   
   .about-header p {
-    font-size: 1.1rem;
-    color: #636366;
-  }
-  
-  .about-content {
-    display: grid;
-    gap: 2rem;
+    color: #a2a2a8;
   }
   
   .about-card {
-    background-color: rgba(245, 245, 247, 0.8);
-    border-radius: 16px;
-    padding: 2rem;
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    border: 0.5px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  }
-  
-  .card-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+    background-color: rgba(44, 44, 46, 0.8);
+    border-color: rgba(255, 255, 255, 0.08);
   }
   
   .about-card h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1c1c1e;
-    margin-bottom: 1.2rem;
+    color: #f5f5f7;
   }
   
   .about-card p,
   .about-card li {
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: #3a3a3c;
-  }
-  
-  .about-card ul,
-  .about-card ol {
-    padding-left: 1.2rem;
-  }
-  
-  .about-card li {
-    margin-bottom: 0.8rem;
-    position: relative;
-  }
-  
-  .about-card li::before {
-    content: "•";
-    color: #007aff;
-    font-size: 1.5rem;
-    position: absolute;
-    left: -1.2rem;
-    top: -0.2rem;
-  }
-  
-  .about-card ol {
-    counter-reset: list-counter;
-    padding-left: 1.5rem;
-  }
-  
-  .about-card ol li {
-    counter-increment: list-counter;
-    list-style-type: none;
-  }
-  
-  .about-card ol li::before {
-    content: counter(list-counter) ".";
-    color: #007aff;
-    font-weight: 600;
-    font-size: 1rem;
-    position: absolute;
-    left: -1.5rem;
-    top: 0.1rem;
-  }
-  
-  .about-footer {
-    text-align: center;
-    margin-top: 3rem;
+    color: #d1d1d6;
   }
   
   .ios-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem 2.5rem;
-    background-color: #007aff;
-    color: white;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.25s ease;
-    border: none;
-    cursor: pointer;
+    background-color: #0a84ff;
   }
   
   .ios-button:hover {
-    background-color: #0062cc;
-    transform: translateY(-2px);
+    background-color: #007aff;
   }
-  
-  /* Dark Mode */
-  @media (prefers-color-scheme: dark) {
-    .about-header h1 {
-      color: #f5f5f7;
-    }
-    
-    .about-header p {
-      color: #a2a2a8;
-    }
-    
-    .about-card {
-      background-color: rgba(44, 44, 46, 0.8);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-    
-    .about-card h2 {
-      color: #f5f5f7;
-    }
-    
-    .about-card p,
-    .about-card li {
-      color: #d1d1d6;
-    }
-    
-    .ios-button {
-      background-color: #0a84ff;
-    }
-    
-    .ios-button:hover {
-      background-color: #007aff;
-    }
-  }
+}

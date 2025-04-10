@@ -5,7 +5,6 @@ import { handleToggleCompleted, handleDelete } from "../services/taskService";
 
 export default function MyList({ tasks = [], setTasks, deletedTasks, loadTasks }) {
   const deletedCount = deletedTasks ? deletedTasks.length : 0;
-  console.log("Deleted count", deletedCount);
   return (
     <div className="tasklist-container">
       <h1>My List</h1>

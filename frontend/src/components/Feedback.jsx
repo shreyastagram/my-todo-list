@@ -34,7 +34,7 @@ export default function Feedback() {
     try {
       await submitFeedback(formData);
       setSuccess(true);
-      setTimeout(() => navigate("/", 3000));
+      setTimeout(() => navigate("/"));
     } catch (err) {
       setError(err.message || "Failed to submit feedback");
     } finally {
