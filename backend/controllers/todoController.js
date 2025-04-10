@@ -2,8 +2,8 @@ const Todo = require("../models/ToDo");
 
 const getTodos = async (req, res) => {
   try {
-    const todos = await Todo.find();
-    res.json(todos);
+    const todos = await Todo.find({ isDeleted: { $ne: true } });
+    res.json({ success: true, data: todos });
   } catch (err) {
     res.status(500).json({ message: "Error fetching todos" });
   }
@@ -52,11 +52,80 @@ const updateTodo = async (req, res) => {
 
 const deleteTodo = async (req, res) => {
   try {
-    await Todo.findByIdAndDelete(req.params.id);
-    res.json({ message: "Task deleted Successfully" });
+    const todo = await Todo.findByIdAndUpdate(
+      req.params.id,
+      { isDeleted: true, deletedAt: new Date() },
+      { new: true }
+    );
+    if (!todo) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Task not found" });
+    }
+    res.json({
+      success: true,
+      message: "Task moved to recyclebin",
+      data: todo,
+    });
   } catch (err) {
     res.status(500).json({ message: "Error deleting task" });
   }
 };
+const getDeletedTodos = async (req, res) => {
+  try {
+    const todos = await Todo.find({ isDeleted: true }).sort({ deletedAt: -1 });
+    res.json({ success: true, data: todos });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Error fetching deleted todos" });
+  }
+};
 
-module.exports = { getTodos, getTodoById, createTodo, updateTodo, deleteTodo };
+const restoreTodo = async (req, res) => {
+  try {
+    const todo = await Todo.findByIdAndUpdate(
+      req.params.id,
+      { isDeleted: false, deletedAt: null },
+      { new: true }
+    );
+    if (!todo) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Task not found" });
+    }
+    res.json({
+      success: true,
+      message: "Task restored successfully",
+      data: todo,
+    });
+  } catch (err) {
+    res.status(500), json({ success: false, message: "Error restoring task" });
+  }
+};
+
+const deletePermanently = async (req, res) => {
+  try {
+    const todo = await Todo.findByIdAndDelete(req.params.id);
+    if (!todo) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Task not found" });
+    }
+    res.json({ success: true, message: "Task permanently deleted" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, message: "Error deleting task permanently" });
+  }
+};
+module.exports = {
+  getDeletedTodos,
+  deletePermanently,
+  restoreTodo,
+  getTodos,
+  getTodoById,
+  createTodo,
+  updateTodo,
+  deleteTodo,
+};

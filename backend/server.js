@@ -9,9 +9,11 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-  origin: 'http://localhost:5173'
-})); //allow cross origin request
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+); //allow cross origin request
 
 app.use(express.json());
 
