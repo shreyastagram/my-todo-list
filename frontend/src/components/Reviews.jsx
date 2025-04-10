@@ -11,7 +11,9 @@ export default function Reviews() {
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const response = await fetch("http://localhost:3000/feedback");
+        const response = await fetch(
+          `${import.meta.env.VITE_BACKEND_URL}/feedback`
+        );
         if (!response.ok) throw new Error("Failed to fetch feedback");
         const data = await response.json();
         setFeedbacks(data.data);
@@ -48,13 +50,16 @@ export default function Reviews() {
         ))}
       </div>
       <div className="button-group">
-
-      <Link to="/feedback" style={{ marginRight: "10px" }} className="back-button">
-        Submit Your Feedback
-      </Link>
-      <Link to="/" className="back-button">
-        Back to App
-      </Link>
+        <Link
+          to="/feedback"
+          style={{ marginRight: "10px" }}
+          className="back-button"
+        >
+          Submit Your Feedback
+        </Link>
+        <Link to="/" className="back-button">
+          Back to App
+        </Link>
       </div>
     </div>
   );
