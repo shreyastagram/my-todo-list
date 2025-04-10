@@ -8,7 +8,7 @@ export default function About() {
     <div className="about-container">
       <div className="about-header">
         <h1>About Our App</h1>
-        <p>Designed to simplify your daily tasks</p>
+        <h3>Designed to simplify your daily tasks</h3>
       </div>
 
       <div className="about-content">
